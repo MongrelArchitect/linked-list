@@ -20,9 +20,17 @@ const LinkedList = () => {
     }
   };
 
-  return { append, getHead };
+  const prepend = (value) => {
+    // New node becomes head & points to old head
+    const newNode = Node(value);
+    newNode.next = head;
+    head = newNode;
+  };
+
+  return { append, prepend, getHead };
 };
 
 const list = LinkedList();
 list.append('first');
 list.append('second');
+list.prepend('new-first');
