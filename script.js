@@ -19,6 +19,14 @@ const LinkedList = () => {
     return currentNode;
   };
 
+  const atIndex = (index) => {
+    let currentNode = head;
+    for (let i = 0; i < index; i += 1) {
+      currentNode = currentNode.next;
+    }
+    return currentNode;
+  };
+
   const append = (value) => {
     const newNode = Node(value);
     if (!head) {
@@ -45,7 +53,12 @@ const LinkedList = () => {
   };
 
   return {
-    getSize, append, prepend, getHead, getTail,
+    getSize,
+    append,
+    prepend,
+    getHead,
+    getTail,
+    atIndex,
   };
 };
 
@@ -54,4 +67,3 @@ list.append('first');
 list.append('second');
 list.prepend('new-first');
 list.append('last');
-console.log(list.getTail());
