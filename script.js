@@ -127,6 +127,7 @@ const LinkedList = () => {
   const insertAt = (value, index) => {
     const newNode = Node(value);
     const replacedNode = atIndex(index);
+    // Indexes too small or large will just prepend or append
     if (index <= 0) {
       prepend(value);
     } else if (index >= size) {
@@ -140,24 +141,37 @@ const LinkedList = () => {
     }
   };
 
+  const removeAt = (i) => {
+    let index = i;
+    // Too large index will just remove the last node
+    if (index >= size) {
+      index = size - 1;
+    }
+    // Zero or less index removes the first node
+    if (index <= 0) {
+      const nextNode = head.next;
+      head = nextNode;
+    } else {
+      // Shuffle pointers around
+      const prevNode = atIndex(index - 1);
+      const nextNode = atIndex(index + 1);
+      prevNode.next = nextNode;
+    }
+    size -= 1;
+  };
+
   return {
-    getSize,
     append,
-    prepend,
-    getHead,
-    getTail,
     atIndex,
-    pop,
     contains,
     find,
-    toString,
+    getHead,
+    getSize,
+    getTail,
     insertAt,
+    pop,
+    prepend,
+    removeAt,
+    toString,
   };
 };
-
-const list = LinkedList();
-list.append('first');
-list.append('second');
-list.prepend('new-first');
-list.append('last');
-list.append('new-last');
