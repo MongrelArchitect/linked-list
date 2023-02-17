@@ -84,6 +84,46 @@ const LinkedList = () => {
     return false;
   };
 
+  const find = (value) => {
+    if (!head) {
+      // List is empty so obviously value isn't there
+      return null;
+    }
+
+    // Traverse list to find the value
+    let currentNode = head;
+    for (let i = 0; i < size; i += 1) {
+      if (currentNode.data === value) {
+        return i;
+      }
+      currentNode = currentNode.next;
+    }
+
+    // No joy
+    return null;
+  };
+
+  const toString = () => {
+    // No head, so no list to show;
+    if (!head) {
+      return null;
+    }
+
+    let string = '';
+    let currentNode = head;
+    // Loop through 'em all & build up the string
+    for (let i = 0; i < size; i += 1) {
+      string += `(${currentNode.data})`;
+      if (currentNode.next) {
+        string += ' -> ';
+        currentNode = currentNode.next;
+      } else {
+        string += ' -> null';
+      }
+    }
+    return string;
+  };
+
   return {
     getSize,
     append,
@@ -93,6 +133,8 @@ const LinkedList = () => {
     atIndex,
     pop,
     contains,
+    find,
+    toString,
   };
 };
 
@@ -101,3 +143,4 @@ list.append('first');
 list.append('second');
 list.prepend('new-first');
 list.append('last');
+list.append('new-last');
