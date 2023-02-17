@@ -45,11 +45,43 @@ const LinkedList = () => {
   };
 
   const prepend = (value) => {
-    // New node becomes head & points to old head
+    // Add new node which becomes head & points to old head
     const newNode = Node(value);
     newNode.next = head;
     head = newNode;
     size += 1;
+  };
+
+  const pop = () => {
+    // Remove last node
+    const lastIndex = size - 1;
+    const penultimate = atIndex(lastIndex - 1);
+    penultimate.next = null;
+    size -= 1;
+  };
+
+  const contains = (value) => {
+    if (!head) {
+      // List is empty so obviously value isn't there
+      return false;
+    }
+
+    // Check the first & last nodes
+    if (head.data === value || getTail().data === value) {
+      return true;
+    }
+
+    // Check all others
+    let currentNode = head;
+    while (currentNode.next) {
+      if (currentNode.data === value) {
+        return true;
+      }
+      currentNode = currentNode.next;
+    }
+
+    // No joy
+    return false;
   };
 
   return {
@@ -59,6 +91,8 @@ const LinkedList = () => {
     getHead,
     getTail,
     atIndex,
+    pop,
+    contains,
   };
 };
 
