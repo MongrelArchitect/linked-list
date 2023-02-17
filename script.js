@@ -124,6 +124,22 @@ const LinkedList = () => {
     return string;
   };
 
+  const insertAt = (value, index) => {
+    const newNode = Node(value);
+    const replacedNode = atIndex(index);
+    if (index <= 0) {
+      prepend(value);
+    } else if (index >= size) {
+      append(value);
+    } else {
+      // Gotta rearrange pointers
+      const prevNode = atIndex(index - 1);
+      prevNode.next = newNode;
+      newNode.next = replacedNode;
+      size += 1;
+    }
+  };
+
   return {
     getSize,
     append,
@@ -135,6 +151,7 @@ const LinkedList = () => {
     contains,
     find,
     toString,
+    insertAt,
   };
 };
 
